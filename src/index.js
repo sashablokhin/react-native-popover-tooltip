@@ -261,7 +261,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
     const labelContainerStyle = this.props.labelContainerStyle;
     const borderStyle =
       labelContainerStyle && labelContainerStyle.backgroundColor
-        ? { borderTopColor: labelContainerStyle.backgroundColor }
+        ? { borderColor: labelContainerStyle.backgroundColor }
         : null;
     let triangleDown = null;
     let triangleUp = null;
