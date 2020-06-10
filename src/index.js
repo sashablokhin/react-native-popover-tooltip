@@ -169,6 +169,8 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
     ) {
       return;
     }
+    
+    const {yOffset = 20} = this.props.tooltipContainerStyle;
 
     const componentWrapper = this.wrapperComponent;
     invariant(componentWrapper, "should be set");
@@ -179,15 +181,15 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
         ? window.width - tooltipContainerWidth
         : pageX + (width - tooltipContainerWidth) / 2;
       let tooltipContainerY_final = this.state.tooltipTriangleDown
-        ? pageY - tooltipContainerHeight - 20
-        : pageY + tooltipContainerHeight - 20;
+        ? pageY - tooltipContainerHeight - yOffset
+        : pageY + tooltipContainerHeight - yOffset;
       let tooltipTriangleDown = this.state.tooltipTriangleDown;
-      if (pageY - tooltipContainerHeight - 20 < 0) {
-        tooltipContainerY_final = pageY + height + 20;
+      if (pageY - tooltipContainerHeight - yOffset < 0) {
+        tooltipContainerY_final = pageY + height + yOffset;
         tooltipTriangleDown = false;
       }
       if (pageY + tooltipContainerHeight + 80 > window.height) {
-        tooltipContainerY_final = pageY - tooltipContainerHeight - 20;
+        tooltipContainerY_final = pageY - tooltipContainerHeight - yOffset;
         tooltipTriangleDown = true;
       }
       const tooltipContainerX = this.state.tooltipContainerScale.interpolate({
@@ -197,7 +199,7 @@ class PopoverTooltip extends React.PureComponent<Props, State> {
       const tooltipContainerY = this.state.tooltipContainerScale.interpolate({
         inputRange: [0, 1],
         outputRange: [
-          tooltipContainerY_final + tooltipContainerHeight / 2 + 20,
+          tooltipContainerY_final + tooltipContainerHeight / 2 + yOffset,
           tooltipContainerY_final,
         ],
       });
